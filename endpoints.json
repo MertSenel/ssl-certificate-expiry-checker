@@ -1,0 +1,36 @@
+[{
+        "service": "service_A",
+        "hostname": "azure.microsoft.com",
+        "environment": "prod"
+    },
+    {
+        "service": "service_B",
+        "hostname": "httpbin.org",
+        "environment": "prod"
+    },
+    {
+        "service": "service_C",
+        "hostname": "github.com",
+        "environment": "prod"
+    },
+    {
+        "service": "external",
+        "hostname": "www.google.com",
+        "environment": "prod"
+    },
+    {
+        "service": "external",
+        "hostname": "www.facebook.com",
+        "environment": "prod"
+    },
+    {
+        "service": "external",
+        "hostname": "www.microsoft.com",
+        "environment": "prod"
+    },
+    {
+        "service": "external",
+        "hostname": "stackoverflow.com",
+        "environment": "prod"
+    }
+]
