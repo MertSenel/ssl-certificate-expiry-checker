@@ -6,6 +6,16 @@
 **Custom HTML Report Sample**
 <img src="docs/CustomHTMLReport_Sample.png" alt="CustomHTMLReport_Sample"/>
 
+
+## Pipelines Badges
+
+*Pipelines may show as failed due to SSL Certificates Expiry Dates Being Below Alert Thresholds, as solution is using Pipeline status as another method of denoting alert status.
+
+|CI/CD Tool  | Pipeline Badge  |
+|:-----------------------:|:---------:|
+|**Azure DevOps**                      |[![Build Status](https://dev.azure.com/mertsenel/DevOpsDemos/_apis/build/status/MertSenel.ssl-certificate-expiry-checker?branchName=main)](https://dev.azure.com/mertsenel/DevOpsDemos/_build/latest?definitionId=31&branchName=main) |
+|**GitHub Actions**                       |   [![check-ssl-expiry](https://github.com/MertSenel/ssl-certificate-expiry-checker/actions/workflows/check-ssl-expiry.yml/badge.svg?branch=main)](https://github.com/MertSenel/ssl-certificate-expiry-checker/actions/workflows/check-ssl-expiry.yml) |
+
 ## Background
 
 Operation teams are responsible for rotating SSL certificates of the services they are responsible for which have HTTPS endpoints.
@@ -34,6 +44,7 @@ Customizable within the utility scripts, the current alerting thresholds and col
 - Pester Test results are reported in the pipeline for seeing if any of the endpoints checked has an SSL certificate with expiry date within alerting periods.
 - The test results are also allows us to report on pipeline's result status. An easy way for getting notified from the pipeline can be achieved via subscribing to the pipeline's results in various ways Azure DevOps has native integration such as email, or Microsoft Teams Azure DevOps bot. 
 - Alternative e-mail based or webhook based notifications can be added via the utility script `Send-Notifications.ps1`.
+- Azure DevOps project dashboard widgets such as test results trends or pipeline build result widget can be used to track status at a glance inside Azure DevOps.
 
 #### Sample Azure DevOps Pipeline Run Screenshots
 
@@ -45,6 +56,9 @@ Customizable within the utility scripts, the current alerting thresholds and col
 
 **Sample Azure DevOps Pipeline Run Custom HTML Report**
 <img src="docs/AzureDevOpsPipeline_CustomHTMLReportSample.png" alt="AzureDevOpsPipeline_CustomHTMLReportSample"/>
+
+**Sample Azure DevOps Dashboard Sample**
+<img src="docs/AzureDevOpsPipeline_DashboardWidget_PipelineTrends.png" alt="AzureDevOpsPipeline_DashboardWidget_PipelineTrends"/>
 
 ### GitHub Actions
 
@@ -64,6 +78,9 @@ Customizable within the utility scripts, the current alerting thresholds and col
 
 **Sample GitHub Actions Workflow Run Custom HTML Report**
 <img src="docs/GitHubActionsWorkflow_CustomHTMLReportSample.png" alt="GitHubActionsWorkflow_CustomHTMLReportSample"/>
+
+**Sample GitHub Actions Workflow Run Custom HTML Report Published to GitHub Pages**
+<img src="docs/GitHubActionsWorkflow_CustomHTMLReportGitHubPageSample.png" alt="GitHubActionsWorkflow_CustomHTMLReportGitHubPageSample"/>
 
 ## Usage
 
