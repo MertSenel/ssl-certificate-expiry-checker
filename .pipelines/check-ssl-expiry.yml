@@ -1,0 +1,56 @@
+name: $(Build.DefinitionName)_$(Build.BuildId)$(Rev:.r)
+
+trigger:
+  branches:
+      include: 
+        - main
+        - '*'
+
+schedules:
+- cron: "0 1 * * Mon,Tue,Wed,Thu,Fri"  # 01:00 UTC makes 12pm AEDT on Weekdays
+  displayName: Daily build Weekdays
+  branches:
+    include:
+    - main
+
+pool:
+  vmImage: ubuntu-latest
+
+jobs:
+  - job: check_ssl_expiry
+    displayName: 'Check SSL Expiry'
+    steps:
+    - task: PowerShell@2
+      displayName: 'Check SSL Expiry'
+      inputs:
+        filePath: 'check-ssl-expiry.ps1'
+        failOnStderr: false
+        pwsh: true
+
+    - task: PublishHtmlReport@1
+      displayName: 'Publish HTML Report'
+      condition: always()
+      inputs:
+        reportDir: './_site/index.html'
+        tabName: SSL Expiry Report
+
+    - task: PowerShell@2
+      displayName: 'Run Pester Tests'
+      inputs:
+        targetType: 'inline'
+        script: |
+          # This updates pester not always necessary but worth noting
+          Install-Module -Name Pester -Force -SkipPublisherCheck
+          
+          Import-Module Pester
+          
+          Invoke-Pester -Script $(System.DefaultWorkingDirectory)/tests/Run-Tests.ps1 -OutputFile $(System.DefaultWorkingDirectory)/TestResults.xml -OutputFormat JUnitXml
+        pwsh: true
+
+    - task: PublishTestResults@2
+      displayName: 'Publish Test Report'
+      condition: always()
+      inputs:
+        testResultsFormat: 'JUnit'
+        testResultsFiles: 'TestResults.xml'
+        searchFolder: '$(System.DefaultWorkingDirectory)/'
